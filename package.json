@@ -1,14 +1,17 @@
 {
-  "name": "turappen-scraper",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "puppeteer": "^3.0.1"
-  }
+	"name": "turappen-scraper",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "nodemon ./src/index.js",
+		"start": "node ./src/index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"firebase-admin": "^8.11.0",
+		"puppeteer": "^3.0.1"		
+	}
 }

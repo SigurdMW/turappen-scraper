@@ -4,14 +4,17 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "nodemon ./src/index.js",
-		"start": "node ./src/index.js",
+		"dev": "set NODE_ENV=dev && nodemon ./src/index.js",
+		"start": "set NODE_ENV=production && node ./src/index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
 		"firebase-admin": "^8.11.0",
-		"puppeteer": "^3.0.1"		
+		"puppeteer": "^3.0.1"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.3"
 	}
 }

@@ -1,6 +1,8 @@
 const { ref } = require("./firebase");
 const puppeteer = require("puppeteer");
 
+const isProduction = process.env.NODE_ENV.trim() === "production"
+
 const wait = (t) => new Promise((res, req) => {
 	setTimeout(() => {
 		res()
@@ -27,7 +29,10 @@ const scoresToGet = [
 
 
 const getScores = async (region, names = []) => {
-	const browser = await puppeteer.launch();
+	const browser = await puppeteer.launch(isProduction ? {
+		executablePath: process.env.PUPPETEER_EXEC_PATH, // set by docker container
+  		headless: false
+	} : undefined);
 	const page = await browser.newPage();
 	await page.goto('https://turappen.no/lister.html');
 	await page.click("main .container .row:nth-child(1) .col-md-2:nth-child(4) button:nth-child(1)")
@@ -51,6 +56,7 @@ const getScores = async (region, names = []) => {
 			}
 		}
 	}
+	console.log("Finished, result is ", result)
 	result.forEach(saveResult)
 	await browser.close();
 }

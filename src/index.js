@@ -31,7 +31,8 @@ const scoresToGet = [
 const getScores = async (region, names = []) => {
 	const browser = await puppeteer.launch(isProduction ? {
 		executablePath: process.env.PUPPETEER_EXEC_PATH, // set by docker container
-  		headless: false
+		headless: false,
+		args: ["--no-sandbox"]
 	} : undefined);
 	const page = await browser.newPage();
 	await page.goto('https://turappen.no/lister.html');
@@ -43,10 +44,10 @@ const getScores = async (region, names = []) => {
 	const result = []
 	for (const name of names) {
 		const foundName = await page.$$("#poengTable tr")
-		for(const el of foundName) {
+		for (const el of foundName) {
 			const element = await el.$("td:nth-child(2)")
 			const text = await page.evaluate(el => el.innerText, element)
-			if(text.trim() === name) {
+			if (text.trim() === name) {
 				const scoreElement = await el.$("td:nth-child(4)")
 				const score = await page.evaluate(el => el.innerText, scoreElement)
 				result.push({
@@ -65,7 +66,7 @@ const run = async () => {
 	try {
 		await Promise.all(scoresToGet.map((obj) => getScores(obj.region, obj.names)))
 		process.exit(0)
-	} catch(e) {
+	} catch (e) {
 		console.log(e)
 		process.exit(1)
 	}

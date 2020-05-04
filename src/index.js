@@ -1,7 +1,11 @@
-const { ref } = require("./firebase");
 const puppeteer = require("puppeteer");
-
 const isProduction = (process.env.NODE_ENV || "production").trim() === "production"
+
+if (!isProduction) {
+	require('dotenv').config()
+}
+
+const { ref } = require("./firebase");
 
 const wait = (t) => new Promise((res, req) => {
 	setTimeout(() => {

@@ -35,5 +35,7 @@ jobs:
       uses: mujo-code/puppeteer-headful@master
       env:
         CI: 'true'
+        PRIVATE_KEY_ID: ${{ secrets.PRIVATE_KEY_ID }}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }} 
       with:
         args: npm start

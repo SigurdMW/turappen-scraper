@@ -5,6 +5,8 @@ const serviceAccount = require("./turappen-leaderboard-firebase-adminsdk-juf2a-d
 serviceAccount.private_key_id = process.env.PRIVATE_KEY_ID
 serviceAccount.private_key = process.env.PRIVATE_KEY
 
+console.log(serviceAccount)
+
 firebase.initializeApp({
 	credential: firebase.credential.cert(serviceAccount),
 	databaseURL: "https://turappen-leaderboard.firebaseio.com"

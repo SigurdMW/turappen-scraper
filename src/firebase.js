@@ -3,9 +3,7 @@ const firebase = require("firebase-admin");
 const serviceAccount = require("./turappen-leaderboard-firebase-adminsdk-juf2a-d16e7b6e8f.json");
 
 serviceAccount.private_key_id = process.env.PRIVATE_KEY_ID
-serviceAccount.private_key = JSON.parse("{\"test\": " + process.env.PRIVATE_KEY + "}").test
-
-console.log(serviceAccount)
+serviceAccount.private_key = JSON.parse("{\"test\": \"" + process.env.PRIVATE_KEY + "\"}").test
 
 firebase.initializeApp({
 	credential: firebase.credential.cert(serviceAccount),
